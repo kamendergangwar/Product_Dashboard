@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ProductTable = ({ products, addToCart }) => {
+const ProductTable = ({ products, addToCart, editProduct, viewProduct, deleteProduct }) => {
   const [currentColumns, setCurrentColumns] = useState([
     { id: 'id', label: 'ID' },
     { id: 'image', label: 'Image' },
@@ -90,9 +90,24 @@ const ProductTable = ({ products, addToCart }) => {
                       >
                         Add to Cart
                       </button>
-                      <button className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600">Edit</button>
-                      <button className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</button>
-                      <button className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-600">View</button>
+                      <button
+                        onClick={() => editProduct(product)}
+                        className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => deleteProduct(product.id)}
+                        className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        onClick={() => viewProduct(product)}
+                        className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-600"
+                      >
+                        View
+                      </button>
                     </div>
                   ) : (
                     product[column.id]

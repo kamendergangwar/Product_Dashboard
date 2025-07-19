@@ -3,7 +3,8 @@ import Header from './components/Header';
 import StatsCards from './components/StatsCards';
 import ProductTable from './components/ProductTable';
 import CartModal from './components/CartModal';
-import SearchBar from './components/SearchBar';
+import EditProductModal from './components/EditProductModal';
+import ViewProductModal from './components/ViewProductModal';
 import generateMockProducts from './utils/mockData';
 
 const App = () => {
@@ -11,6 +12,10 @@ const App = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [editProduct, setEditProduct] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [viewProduct, setViewProduct] = useState(null);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
   useEffect(() => {
     const mockProducts = generateMockProducts(1000);
@@ -42,6 +47,35 @@ const App = () => {
     }
   };
 
+  const handleEditProduct = (product) => {
+    setEditProduct(product);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveProduct = (updatedProduct) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
+    );
+    setFilteredProducts((prevFiltered) =>
+      prevFiltered.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
+    );
+    setIsEditModalOpen(false);
+    setEditProduct(null);
+  };
+
+  const handleViewProduct = (product) => {
+    setViewProduct(product);
+    setIsViewModalOpen(true);
+  };
+
+  const handleDeleteProduct = (productId) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      setProducts((prevProducts) => prevProducts.filter((p) => p.id !== productId));
+      setFilteredProducts((prevFiltered) => prevFiltered.filter((p) => p.id !== productId));
+      setCart((prevCart) => prevCart.filter((item) => item.product.id !== productId));
+    }
+  };
+
   const totalProducts = products.length;
   const totalRevenue = products.reduce((total, p) => total + parseFloat(p.price), 0);
   const lowStockItems = products.filter((p) => p.stock < 10).length;
@@ -60,8 +94,31 @@ const App = () => {
         lowStockItems={lowStockItems}
         categoriesCount={categoriesCount}
       />
-      <ProductTable products={filteredProducts} addToCart={addToCart} />
+      <ProductTable
+        products={filteredProducts}
+        addToCart={addToCart}
+        editProduct={handleEditProduct}
+        viewProduct={handleViewProduct}
+        deleteProduct={handleDeleteProduct}
+      />
       <CartModal cart={cart} setCart={setCart} isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <EditProductModal
+        product={editProduct}
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setEditProduct(null);
+        }}
+        onSave={handleSaveProduct}
+      />
+      <ViewProductModal
+        product={viewProduct}
+        isOpen={isViewModalOpen}
+        onClose={() => {
+          setIsViewModalOpen(false);
+          setViewProduct(null);
+        }}
+      />
     </div>
   );
 };

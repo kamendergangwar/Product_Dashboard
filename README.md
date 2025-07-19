@@ -52,27 +52,29 @@ A modern and responsive web application built using **Vite**, **React**, and **T
 ```
 product-dashboard/
 ├── public/
-│   └── vite.svg                 # Default Vite favicon
+│ └── vite.svg # Default Vite favicon
 ├── src/
-│   ├── components/
-│   │   ├── Header.jsx           # Header with navigation, search, cart badge
-│   │   ├── StatsCards.jsx       # Dashboard metric cards
-│   │   ├── ProductTable.jsx     # Product table (pagination, DnD, actions)
-│   │   ├── CartModal.jsx        # Cart slide-out modal
-│   │   └── SearchBar.jsx        # Debounced search input
-│   ├── utils/
-│   │   └── mockData.js          # Mock data generator for products
-│   ├── App.jsx                  # Main app component
-│   ├── main.jsx                 # React entry point
-│   └── index.css                # Tailwind base and custom styles
+│ ├── components/
+│ │ ├── Header.jsx # Header with navigation, search, cart badge
+│ │ ├── StatsCards.jsx # Dashboard metric cards
+│ │ ├── ProductTable.jsx # Product table (pagination, DnD, actions)
+│ │ ├── CartModal.jsx # Cart slide-out modal
+│ │ ├── EditProductModal.jsx # Edit Modal to Edit Product
+│ │ ├── ViewProductModal.jsx # View Modal to view Product
+│ │ └── SearchBar.jsx # Debounced search input
+│ ├── utils/
+│ │ └── mockData.js # Mock data generator for products
+│ ├── App.jsx # Main app component
+│ ├── main.jsx # React entry point
+│ └── index.css # Tailwind base and custom styles
 ├── .vscode/
-│   └── settings.json            # Tailwind linting suppressor
-├── index.html                   # Root HTML file
-├── package.json                 # Project dependencies and scripts
-├── vite.config.js               # Vite configuration
-├── tailwind.config.js           # Tailwind CSS configuration
-├── postcss.config.js            # PostCSS configuration
-└── README.md                    # Project documentation
+│ └── settings.json # Tailwind linting suppressor
+├── index.html # Root HTML file
+├── package.json # Project dependencies and scripts
+├── vite.config.js # Vite configuration
+├── tailwind.config.js # Tailwind CSS configuration
+├── postcss.config.js # PostCSS configuration
+└── README.md # Project documentation
 ```
 
 ---
